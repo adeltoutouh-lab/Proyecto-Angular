@@ -1,0 +1,25 @@
+<div *ngIf="loading" class="text-center py-5">
+  <div class="spinner-border" role="status"></div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+<div class="card shadow-sm p-4 p-md-5" *ngIf="user && !loading">
+  <div class="row align-items-center g-4">
+    <div class="col-md-5 text-center border-end-md">
+      <img [src]="user.image" [alt]="user.first_name" class="detail-img">
+    </div>
+    <div class="col-md-7">
+      <h1 class="h3">{{ user.first_name }} {{ user.last_name }}</h1>
+      <p class="mb-2"><strong>ID:</strong> {{ user.id }}</p>
+      <p class="mb-2"><strong>Nombre de usuario:</strong> {{ user.username }}</p>
+      <p class="mb-4"><strong>Email:</strong> {{ user.email }}</p>
+
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-danger" (click)="delete()">Eliminar</button>
+        <button class="btn btn-secondary" (click)="update()">Actualizar</button>
+        <button class="btn btn-outline-dark" (click)="goBack()">Volver al listado</button>
+      </div>
+    </div>
+  </div>
+</div>
