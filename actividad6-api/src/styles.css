@@ -1,0 +1,23 @@
+body {
+  background: #f6f7f9;
+  color: #252525;
+}
+
+main {
+  min-height: calc(100vh - 80px);
+}
+
+.card {
+  border-radius: 8px;
+}
+
+.user-img {
+  width: 145px;
+  height: 145px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.form-label {
+  font-weight: 500;
+}
