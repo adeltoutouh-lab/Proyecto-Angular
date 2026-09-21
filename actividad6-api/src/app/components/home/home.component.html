@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="h3 mb-1">Listado de usuarios</h1>
+    <p class="text-secondary mb-0">Usuarios recuperados desde la API externa.</p>
+  </div>
+  <a class="btn btn-primary" routerLink="/newuser">Nuevo usuario</a>
+</div>
+
+<div *ngIf="loading" class="text-center py-5">
+  <div class="spinner-border" role="status"></div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+<div class="row g-4" *ngIf="!loading">
+  <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let user of users">
+    <div class="card h-100 shadow-sm text-center p-3">
+      <img [src]="user.image" [alt]="user.first_name" class="user-img mx-auto mb-3">
+      <h2 class="h6 mb-3">{{ user.first_name }} {{ user.last_name }}</h2>
+
+      <div class="d-grid gap-2 mt-auto">
+        <button class="btn btn-outline-primary btn-sm" (click)="viewUser(user.id)">Ver detalle</button>
+        <button class="btn btn-outline-secondary btn-sm" (click)="updateUser(user.id)">Actualizar</button>
+        <button class="btn btn-outline-danger btn-sm" (click)="deleteUser(user)">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="mt-4" *ngIf="totalPages > 1" aria-label="Paginación">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <button class="page-link" (click)="loadUsers(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+    </li>
+    <li class="page-item" *ngFor="let page of [1, 2]" [class.active]="currentPage === page" [class.d-none]="page > totalPages">
+      <button class="page-link" (click)="loadUsers(page)">{{ page }}</button>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <button class="page-link" (click)="loadUsers(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+    </li>
+  </ul>
+</nav>
